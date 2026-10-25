@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.newshub.app">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name="${applicationName}"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/LaunchTheme"
+        android:usesCleartextTraffic="true">
+
+        <!-- Android v2 embedding meta-data -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+        <!-- Notification channels -->
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="${appName}"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/FlutterTheme"
+        android:usesCleartextTraffic="true">
+
+        <!-- Notification channels -->
+        <profileable android:shell="true" android:name="debug" />
+
+        <!-- Feeds -->
+        <provider
+            android:name=".MainApplication"
+            android:exported="true"
+            android:process=":main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </provider>
+
+        <!-- Notification channel for new articles -->
+        <channel
+            android:id="new_article_channel"
+            android:name="NewsHub Notifications"
+            android:importance="high"
+            android:description="Notifications for new articles"
+            android:enableLights="true"
+            android:enableVibration="true" />
+
+        <!-- Notification channel for boot notifications -->
+        <channel
+            android:id="boot_channel"
+            android:name="Boot Notifications"
+            android:importance="high"
+            android:description="Notifications for boot completed"
+            android:enableLights="true"
+            android:enableVibration="true" />
+    </application>
+</manifest>
